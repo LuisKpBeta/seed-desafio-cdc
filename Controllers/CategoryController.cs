@@ -26,12 +26,8 @@ public class CategoryController : ControllerBase
         var nameExists = await _context.Category.AnyAsync(a => a.Name == payload.Name);
         if (nameExists)
         {
-            var message = new HttpResponseMessage()
-            {
-                ReasonPhrase = "This category already exists",
-                StatusCode = HttpStatusCode.BadRequest
-            };
-            return BadRequest(message);
+            var errorMessage = new { error = "The category already exists" };
+            return BadRequest(errorMessage);
         }
 
 

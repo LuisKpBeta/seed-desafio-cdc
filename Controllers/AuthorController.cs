@@ -26,12 +26,8 @@ public class AuthorController : ControllerBase
         var emailExists = await _context.Author.AnyAsync(a => a.Email == payload.Email);
         if (emailExists)
         {
-            var message = new HttpResponseMessage()
-            {
-                ReasonPhrase = "The email already exists",
-                StatusCode = HttpStatusCode.BadRequest
-            };
-            return BadRequest(message);
+            var errorMessage = new { error = "The email already exists" };
+            return BadRequest(errorMessage);
         }
 
 
