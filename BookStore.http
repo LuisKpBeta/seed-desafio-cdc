@@ -1,0 +1,31 @@
+@BookStore_HostAddress = http://localhost:5109
+#cadastro valido
+POST {{BookStore_HostAddress}}/author/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "new author",
+  "email" : "newauthor@gmail.com",
+  "description" : "descrição de informações para o novo autor"
+}
+###
+#cadastro invalido
+POST {{BookStore_HostAddress}}/author/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "",
+  "email" : "newauthor@gmail.com",
+  "description" : ""
+}
+###
+
+POST {{BookStore_HostAddress}}/category/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "new category"
+}
