@@ -4,7 +4,8 @@ using BookStore.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<BookStoreContext>(opt =>
-    opt.UseInMemoryDatabase("BookStore"));
+    opt.UseNpgsql("Host=localhost;Database=localhost;Username=postgres;Password=postgres"));
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
