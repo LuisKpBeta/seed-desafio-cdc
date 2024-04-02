@@ -30,8 +30,7 @@ public class AuthorController : ControllerBase
             return BadRequest(errorMessage);
         }
 
-
-        var author = new Author(payload.Name, payload.Email, payload.Description);
+        Author author = new(payload.Name, payload.Email, payload.Description);
         _context.Add(author);
         await _context.SaveChangesAsync();
         return Created(nameof(Author), author);

@@ -31,7 +31,7 @@ public class CategoryController : ControllerBase
         }
 
 
-        var category = new Category
+        Category category = new()
         {
             Name = payload.Name
         };
