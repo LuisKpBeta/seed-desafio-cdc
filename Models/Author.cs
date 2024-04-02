@@ -1,11 +1,13 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Models;
 
+[Index(nameof(Email), IsUnique = true)]
 public class Author
 {
     [Key]
-    public int Id { get; private set; }
+    public int Id { get; set; }
     public string Name { get; private set; }
     public string Email { get; private set; }
     public string Description { get; private set; }
