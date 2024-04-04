@@ -4,7 +4,7 @@ using BookStore.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<BookStoreContext>(opt =>
-    opt.UseNpgsql("Host=localhost;Database=localhost;Username=postgres;Password=postgres"));
+    opt.UseNpgsql("Host=localhost;Database=bookstore;Username=postgres;Password=postgres"));
 
 
 builder.Services.AddControllers();
