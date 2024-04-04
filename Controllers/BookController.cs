@@ -1,10 +1,7 @@
-using System.Net;
 using BookStore.Controllers.DTO;
 using BookStore.Models;
 using BookStore.Services;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Controllers;
 
@@ -33,5 +30,4 @@ public class BookController : ControllerBase
     Book newBook = await bookService.Save(result.Item2!);
     return Created(nameof(Book), newBook);
   }
-
 }
