@@ -29,3 +29,20 @@ Content-Type: application/json
 {
   "name": "new category"
 }
+
+###
+POST {{BookStore_HostAddress}}/book/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "title": "Título do Livro 2",
+  "resume": "Resumo do Livro",
+  "summary": "Sumário do Livro",
+  "price": 2500,
+  "pages": 200,
+  "isbn": "978-3-16-148410-1",
+  "publishDate": "2024-04-01",
+  "categoryId": 1,
+  "authorId": 1
+}
