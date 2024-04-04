@@ -1,6 +1,7 @@
 using System.Net;
 using BookStore.Controllers.DTO;
 using BookStore.Models;
+using BookStore.Services;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,53 +13,25 @@ namespace BookStore.Controllers;
 public class BookController : ControllerBase
 {
   private readonly ILogger<BookController> _logger;
-  private readonly BookStoreContext _context;
+  private readonly BookService bookService;
 
-  public BookController(ILogger<BookController> logger, BookStoreContext context)
+  public BookController(ILogger<BookController> logger, BookService service)
   {
     _logger = logger;
-    _context = context;
+    bookService = service;
   }
 
   [HttpPost]
-  public async Task<ActionResult<Author>> CreateBook([FromBody] CreateBook payload)
+  public async Task<ActionResult<Book>> CreateBook([FromBody] CreateBook payload)
   {
-    // titulo e ISBN são unicos
-    var dataExists = await _context.Book.AnyAsync(b => b.Title == payload.Title || b.Isbn == payload.Isbn);
-    if (dataExists)
+    var result = await bookService.ValidateNewBook(payload);
+    if (result.Item1 is not null)
     {
-      var errorMessage = new { error = "The title or ISBN already exists" };
+      var errorMessage = new { error = result.Item1 };
       return BadRequest(errorMessage);
     }
-
-    Author? author = await _context.Author.FindAsync(payload.AuthorId);
-    if (author is null)
-    {
-      var errorMessage = new { error = "The Author not registered" };
-      return BadRequest(errorMessage);
-    }
-    Category? category = await _context.Category.FindAsync(payload.CategoryId);
-    if (category is null)
-    {
-      var errorMessage = new { error = "The Category not registered" };
-      return BadRequest(errorMessage);
-    }
-
-
-    Book newBook = new()
-    {
-      Title = payload.Title,
-      Resume = payload.Resume,
-      Summary = payload.Summary,
-      Price = payload.Price,
-      Pages = payload.Pages,
-      Isbn = payload.Isbn,
-      PublishDate = payload.PublishDate,
-      CategoryInfo = category,
-      AuthorData = author,
-    };
-    _context.Add(newBook);
-    await _context.SaveChangesAsync();
+    Book newBook = await bookService.Save(result.Item2!);
     return Created(nameof(Book), newBook);
   }
+
 }
