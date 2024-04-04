@@ -36,13 +36,21 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "title": "Título do Livro 2",
+  "title": "Título do Livro 3",
   "resume": "Resumo do Livro",
   "summary": "Sumário do Livro",
   "price": 2500,
   "pages": 200,
-  "isbn": "978-3-16-148410-1",
+  "isbn": "978-3-16-148410-3",
   "publishDate": "2024-04-01",
   "categoryId": 1,
   "authorId": 1
 }
+###
+GET {{BookStore_HostAddress}}/book/
+Accept: application/json
+Content-Type: application/json
+###
+GET {{BookStore_HostAddress}}/book/1/
+Accept: application/json
+Content-Type: application/json
