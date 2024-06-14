@@ -54,3 +54,20 @@ Content-Type: application/json
 GET {{BookStore_HostAddress}}/book/1/
 Accept: application/json
 Content-Type: application/json
+###
+POST {{BookStore_HostAddress}}/country/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Brasil"
+}
+###
+POST {{BookStore_HostAddress}}/state/
+Accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Amazonas",
+  "countryId": 1
+}
