@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using BookStore.Controllers.Annotations;
 using BookStore.Models;
 using BookStore.Models.Sale;
 
@@ -13,21 +14,10 @@ public class CreateBudget
   public required string Name { get; set; }
   [Required]
   public required string Surname { get; set; }
-  private string _document = "";
   [Required]
+  [DocumentAttribute]
   // adicionar parametro de tamanho
-  public string Document
-  {
-    get => _document;
-    set
-    {
-      if (value.Length != 11 && value.Length != 14)
-      {
-        throw new ArgumentException("Invalid document");
-      }
-      _document = value;
-    }
-  }
+  public required string Document { get; set; }
   [Required]
   public required string Address { get; set; }
   [Required]
