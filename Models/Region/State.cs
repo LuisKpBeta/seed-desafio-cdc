@@ -13,5 +13,5 @@ public class State
   public string Name { get; set; } = string.Empty;
 
   [Required]
-  public required Country Country { get; set; }
+  public virtual required Country Country { get; set; }
 }
