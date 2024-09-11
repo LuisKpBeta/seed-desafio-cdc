@@ -71,3 +71,19 @@ Content-Type: application/json
   "name": "Amazonas",
   "countryId": 1
 }
+###
+POST {{BookStore_HostAddress}}/budget
+Content-Type: application/json
+
+{
+  "Email": "user@example.com",
+  "Name": "John",
+  "Surname": "Doe",
+  "Document": "12345678901",
+  "Address": "1243 Main St",
+  "Complement": "Apartment 4B",
+  "City": "Springfield",
+  "CountryId": 35,
+  "PhoneNumber": "+123456789",
+  "PostalCode": "12345"
+}
