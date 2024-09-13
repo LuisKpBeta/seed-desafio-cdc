@@ -20,9 +20,9 @@ public class SaleController : ControllerBase
     _regionService = regionService;
   }
 
-  [Route("/Budget")]
+  [Route("/Sale")]
   [HttpPost]
-  public async Task<ActionResult<Budget>> CreateBudget([FromBody] CreateBudget payload)
+  public async Task<ActionResult<Sale>> CreateSale([FromBody] CreateSale payload)
   {
     int stateId = (int)(payload.StateId != null ? payload.StateId : 0);
     var (errorMessage, country) = await _regionService.FindCountyAndState(payload.CountryId, stateId);
@@ -34,8 +34,8 @@ public class SaleController : ControllerBase
 
 
     var stateInfo = country!.States.FirstOrDefault<State>();
-    Budget budget = payload.ToModel(country, stateInfo);
-    var response = CreateBudgetResponse.FromModel(budget);
-    return Created(nameof(Budget), response);
+    Sale sale = payload.ToModel(country, stateInfo);
+    var response = CreateSaleResponse.FromModel(sale);
+    return Created(nameof(Sale), response);
   }
 }

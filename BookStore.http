@@ -72,14 +72,14 @@ Content-Type: application/json
   "countryId": 1
 }
 ###
-POST {{BookStore_HostAddress}}/budget
+POST {{BookStore_HostAddress}}/sale
 Content-Type: application/json
 
 {
   "Email": "user@example.com",
   "Name": "John",
   "Surname": "Doe",
-  "Document": "12345678901",
+  "Document": "123456789011",
   "Address": "1243 Main St",
   "Complement": "Apartment 4B",
   "City": "Springfield",

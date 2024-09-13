@@ -5,7 +5,7 @@ using BookStore.Models.Sale;
 
 namespace BookStore.Controllers.DTO;
 
-public class CreateBudgetResponse
+public class CreateSaleResponse
 {
   public int Id { get; set; }
   public required string Email { get; set; }
@@ -23,22 +23,22 @@ public class CreateBudgetResponse
   public required string PhoneNumber { get; set; }
   public required string PostalCode { get; set; }
 
-  public static CreateBudgetResponse FromModel(Budget budget)
+  public static CreateSaleResponse FromModel(Sale sale)
   {
-    return new CreateBudgetResponse
+    return new CreateSaleResponse
     {
-      Id = budget.Id,
-      Email = budget.Email,
-      Name = budget.Name,
-      Surname = budget.Surname,
-      Document = budget.Document,
-      Address = budget.Address,
-      Complement = budget.Complement,
-      City = budget.City,
-      CountryName = budget.CountryInfo.Name,
-      StateName = budget.StateInfo?.Name,
-      PhoneNumber = budget.PhoneNumber,
-      PostalCode = budget.PostalCode,
+      Id = sale.Id,
+      Email = sale.Email,
+      Name = sale.Name,
+      Surname = sale.Surname,
+      Document = sale.Document,
+      Address = sale.Address,
+      Complement = sale.Complement,
+      City = sale.City,
+      CountryName = sale.CountryInfo.Name,
+      StateName = sale.StateInfo?.Name,
+      PhoneNumber = sale.PhoneNumber,
+      PostalCode = sale.PostalCode,
     };
   }
 }

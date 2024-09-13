@@ -5,7 +5,7 @@ using BookStore.Models.Sale;
 
 namespace BookStore.Controllers.DTO;
 
-public class CreateBudget
+public class CreateSale
 {
   [Required]
   [EmailAddress]
@@ -16,7 +16,6 @@ public class CreateBudget
   public required string Surname { get; set; }
   [Required]
   [DocumentAttribute]
-  // adicionar parametro de tamanho
   public required string Document { get; set; }
   [Required]
   public required string Address { get; set; }
@@ -29,9 +28,11 @@ public class CreateBudget
   public required string PhoneNumber { get; set; }
   public required string PostalCode { get; set; }
 
-  public Budget ToModel(Country country, State? state)
+
+
+  public Sale ToModel(Country country, State? state)
   {
-    return new Budget(
+    return new Sale(
       email: Email,
       name: Name,
       surname: Surname,

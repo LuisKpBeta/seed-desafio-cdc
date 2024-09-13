@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace BookStore.Models.Sale;
 
-public class Budget
+public class Sale
 {
   [Key]
   public int Id { get; set; }
@@ -20,7 +20,7 @@ public class Budget
   public string PhoneNumber { get; private set; }
   public string PostalCode { get; private set; }
 
-  public Budget(string email, string name, string surname, string document, string address, string complement, string city, Country country, State? state, string phoneNumber, string postalCode)
+  public Sale(string email, string name, string surname, string document, string address, string complement, string city, Country country, State? state, string phoneNumber, string postalCode)
   {
     Email = email;
     Name = name;
