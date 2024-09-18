@@ -36,12 +36,12 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "title": "Título do Livro 3",
-  "resume": "Resumo do Livro",
-  "summary": "Sumário do Livro",
-  "price": 2500,
+  "title": "Título do Livro 4",
+  "resume": "Resumo do Livro ",
+  "summary": "Sumário do Livro ",
+  "price": 2999,
   "pages": 200,
-  "isbn": "978-3-16-148410-3",
+  "isbn": "978-3-16-148410-6",
   "publishDate": "2024-04-01",
   "categoryId": 1,
   "authorId": 1
@@ -51,7 +51,7 @@ GET {{BookStore_HostAddress}}/book/
 Accept: application/json
 Content-Type: application/json
 ###
-GET {{BookStore_HostAddress}}/book/1/
+GET {{BookStore_HostAddress}}/book/2/
 Accept: application/json
 Content-Type: application/json
 ###
@@ -79,11 +79,24 @@ Content-Type: application/json
   "Email": "user@example.com",
   "Name": "John",
   "Surname": "Doe",
-  "Document": "123456789011",
+  "Document": "12345678901",
   "Address": "1243 Main St",
   "Complement": "Apartment 4B",
   "City": "Springfield",
   "CountryId": 35,
   "PhoneNumber": "+123456789",
-  "PostalCode": "12345"
+  "PostalCode": "12345",
+  "OrderData": {
+    "total": 54.99,
+    "itens":[
+      {
+        "idLivro":1,
+        "quantidade": 1
+      },
+      {
+        "idLivro":3,
+        "quantidade": 1
+      }
+    ]
+  }
 }
