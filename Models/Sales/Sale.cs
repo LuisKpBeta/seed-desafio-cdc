@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace BookStore.Models.Sale;
+namespace BookStore.Models.Sales;
 
 public class Sale
 {
@@ -20,7 +20,8 @@ public class Sale
   public string PhoneNumber { get; private set; }
   public string PostalCode { get; private set; }
 
-  public Sale(string email, string name, string surname, string document, string address, string complement, string city, Country country, State? state, string phoneNumber, string postalCode)
+  public Order SaleOrder { get; set; }
+  public Sale(string email, string name, string surname, string document, string address, string complement, string city, Country country, State? state, string phoneNumber, string postalCode, Order order)
   {
     Email = email;
     Name = name;
@@ -33,5 +34,6 @@ public class Sale
     StateInfo = state;
     PhoneNumber = phoneNumber;
     PostalCode = postalCode;
+    SaleOrder = order;
   }
 }
