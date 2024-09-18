@@ -57,7 +57,7 @@ public class SaleController : ControllerBase
     Order order = new Order(orderItens);
     if (order.Total != payload.OrderData.GetTotalParsed())
     {
-      var message = new { error = $"order total value doesn't match with calculated value, expected {order.Total} but received {payload.OrderData.GetTotalParsed()}" };
+      var message = new { error = $"order total value doesn't match with calculated value" };
       return BadRequest(message);
     }
     // verificar se o total de order é igual ao total do payload
