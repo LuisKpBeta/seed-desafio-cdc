@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using BookStore.Controllers.Annotations;
 using BookStore.Models;
-using BookStore.Models.Sale;
+using BookStore.Models.Sales;
 
-namespace BookStore.Controllers.DTO;
+namespace BookStore.Controllers.DTO.Sales;
 
 public class CreateSale
 {
@@ -28,9 +28,10 @@ public class CreateSale
   public required string PhoneNumber { get; set; }
   public required string PostalCode { get; set; }
 
+  [Required]
+  public required CreateOrder OrderData { get; set; }
 
-
-  public Sale ToModel(Country country, State? state)
+  public Sale ToModel(Country country, State? state, Order order)
   {
     return new Sale(
       email: Email,
@@ -43,7 +44,9 @@ public class CreateSale
       country: country,
       state: state,
       phoneNumber: PhoneNumber,
-      postalCode: PostalCode
+      postalCode: PostalCode,
+      order: order
     );
   }
 }
+

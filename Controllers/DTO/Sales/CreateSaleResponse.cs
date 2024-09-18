@@ -1,9 +1,7 @@
-using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using BookStore.Models;
-using BookStore.Models.Sale;
+using BookStore.Models.Sales;
 
-namespace BookStore.Controllers.DTO;
+namespace BookStore.Controllers.DTO.Sales;
 
 public class CreateSaleResponse
 {
@@ -22,9 +20,22 @@ public class CreateSaleResponse
   public string? StateName { get; set; }
   public required string PhoneNumber { get; set; }
   public required string PostalCode { get; set; }
+  public required CreateOrderResponse Order { get; set; }
 
   public static CreateSaleResponse FromModel(Sale sale)
   {
+
+    List<CreateOrderItemResponse> itens = sale.SaleOrder.Items.Select(i => new CreateOrderItemResponse
+    {
+      BookId = i.Item.Id,
+      Quantity = i.Quantity,
+      Value = (decimal)i.Price / 100
+    }).ToList();
+    var order = new CreateOrderResponse
+    {
+      Total = (decimal)sale.SaleOrder.Total / 100,
+      Itens = itens
+    };
     return new CreateSaleResponse
     {
       Id = sale.Id,
@@ -39,6 +50,7 @@ public class CreateSaleResponse
       StateName = sale.StateInfo?.Name,
       PhoneNumber = sale.PhoneNumber,
       PostalCode = sale.PostalCode,
+      Order = order
     };
   }
 }
