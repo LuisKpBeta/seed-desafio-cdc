@@ -33,7 +33,7 @@ public class CreateSale
 
   public Sale ToModel(Country country, State? state, Order order)
   {
-    return new Sale(
+    return Sale.CreateSale(
       email: Email,
       name: Name,
       surname: Surname,

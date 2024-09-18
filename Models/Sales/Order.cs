@@ -8,11 +8,15 @@ public class Order
   public int Id { get; set; }
   [Required]
   public int Total { get; set; }
-  public virtual ICollection<OrderItem> Items { get; set; } = [];
-
+  public ICollection<OrderItem> Items { get; set; }
+  public Order()
+  {
+    Items = [];
+  }
   public Order(ICollection<OrderItem> items)
   {
     Items = items;
     Total = items.Aggregate(0, (acc, i) => acc + (i.Price * (int)i.Quantity));
   }
+
 }

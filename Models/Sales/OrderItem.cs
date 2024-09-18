@@ -4,8 +4,10 @@ namespace BookStore.Models.Sales;
 
 public class OrderItem
 {
+  [Key]
+  public int Id { get; set; }
   [Required]
-  public Book Item { get; set; }
+  public required Book Item { get; set; }
   [Required]
   public uint Quantity { get; set; }
   private int _price;
@@ -19,10 +21,5 @@ public class OrderItem
     }
   }
 
-  public OrderItem(Book book, uint quantity)
-  {
-    Quantity = quantity;
-    Price = book.Price;
-    Item = book;
-  }
+
 }
