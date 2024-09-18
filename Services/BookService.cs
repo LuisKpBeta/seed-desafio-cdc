@@ -49,5 +49,19 @@ public class BookService
     await context.SaveChangesAsync();
     return book;
   }
+  public async Task<(List<Book>, List<int>)> GetBooksByIdList(List<int> booksId)
+  {
+    List<Book> books = await context.Book.Where(b => booksId.Contains(b.Id)).ToListAsync();
+
+    if (booksId.Count != books.Count)
+    {
+      var foundIds = books.Select(b => b.Id);
+      var notFoundIds = booksId.Where(id => !foundIds.Contains(id)).ToList();
+      return ([], notFoundIds);
+    }
+
+    return (books, []);
+
+  }
 
 }
