@@ -13,12 +13,14 @@ public class SaleController : ControllerBase
   private readonly ILogger<SaleController> _logger;
   private readonly RegionService _regionService;
   private readonly BookService _bookService;
+  private readonly SaleService _saleService;
 
-  public SaleController(ILogger<SaleController> logger, RegionService regionService, BookService bookService)
+  public SaleController(ILogger<SaleController> logger, RegionService regionService, BookService bookService, SaleService saleService)
   {
     _logger = logger;
     _regionService = regionService;
     _bookService = bookService;
+    _saleService = saleService;
   }
 
   [Route("/Sale")]
@@ -51,7 +53,12 @@ public class SaleController : ControllerBase
     List<OrderItem> orderItens = payload.OrderData.Itens.Select(i =>
     {
       Book book = bookList.Find(b => b.Id == i.BookId)!;
-      OrderItem orderItem = new OrderItem(book, i.Quantity);
+      OrderItem orderItem = new OrderItem
+      {
+        Item = book,
+        Price = book.Price,
+        Quantity = i.Quantity
+      };
       return orderItem;
     }).ToList();
     Order order = new Order(orderItens);
@@ -62,7 +69,7 @@ public class SaleController : ControllerBase
     }
     // verificar se o total de order é igual ao total do payload
     Sale sale = payload.ToModel(country, stateInfo, order);
-
+    await _saleService.Save(sale);
     var response = CreateSaleResponse.FromModel(sale);
     return Created(nameof(Sale), response);
   }

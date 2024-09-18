@@ -11,6 +11,7 @@ builder.Services.AddDbContext<BookStoreContext>(opt =>
 builder.Services.AddControllers();
 builder.Services.AddScoped<BookService>();
 builder.Services.AddScoped<RegionService>();
+builder.Services.AddScoped<SaleService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
