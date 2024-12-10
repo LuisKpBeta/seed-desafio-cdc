@@ -18,5 +18,6 @@ public class BookStoreContext : DbContext
   public DbSet<Sale> Sale { get; set; } = null!;
   public DbSet<Order> Order { get; set; } = null!;
   public DbSet<OrderItem> OrderItem { get; set; } = null!;
+  public DbSet<Cupon> Cupon { get; set; } = null!;
 
 }

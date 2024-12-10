@@ -87,16 +87,22 @@ Content-Type: application/json
   "PhoneNumber": "+123456789",
   "PostalCode": "12345",
   "OrderData": {
-    "total": 54.99,
+    "total": 25.00,
     "itens":[
       {
         "idLivro":1,
         "quantidade": 1
-      },
-      {
-        "idLivro":3,
-        "quantidade": 1
       }
     ]
   }
+}
+
+###
+POST {{BookStore_HostAddress}}/cupon
+Content-Type: application/json
+
+{
+  "Code": "CUPON10",
+  "Percentage": 50,
+  "ExpiresAt": "2024-09-24"
 }

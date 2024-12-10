@@ -8,11 +8,7 @@ public class Order
   public int Id { get; set; }
   [Required]
   public int Total { get; set; }
-  public ICollection<OrderItem> Items { get; set; }
-  public Order()
-  {
-    Items = [];
-  }
+  public ICollection<OrderItem> Items { get; set; } = [];
   public Order(ICollection<OrderItem> items)
   {
     Items = items;
