@@ -9,4 +9,10 @@ public class Cupon
   public required string Code { get; set; }
   public uint Percentage { get; set; }
   public DateOnly ExpiresAt { get; set; }
+
+  public bool IsStillValid()
+  {
+    var today = DateOnly.FromDateTime(DateTime.Now);
+    return ExpiresAt >= today;
+  }
 }

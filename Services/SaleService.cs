@@ -1,5 +1,6 @@
 using BookStore.Models;
 using BookStore.Models.Sales;
+using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Services;
 
@@ -16,5 +17,9 @@ public class SaleService
     context.Add(sale);
     await context.SaveChangesAsync();
     return sale;
+  }
+  public async Task<Cupon?> FindCuponByCode(string code)
+  {
+    return await context.Cupon.FirstOrDefaultAsync(c => c.Code == code);
   }
 }

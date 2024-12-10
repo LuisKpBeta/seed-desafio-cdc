@@ -30,6 +30,7 @@ public class CreateSale
 
   [Required]
   public required CreateOrder OrderData { get; set; }
+  public string Cupon { get; set; } = "";
 
   public Sale ToModel(Country country, State? state, Order order)
   {

@@ -49,11 +49,17 @@ public class SaleController : ControllerBase
       return BadRequest(message);
     };
 
+    var (cupon, errMessage) = await ValidateCupon(payload.Cupon);
+    if (!string.IsNullOrEmpty(errMessage))
+    {
+      var message = new { error = errMessage };
+      return BadRequest(message);
+    }
 
     List<OrderItem> orderItens = payload.OrderData.Itens.Select(i =>
     {
       Book book = bookList.Find(b => b.Id == i.BookId)!;
-      OrderItem orderItem = new OrderItem
+      OrderItem orderItem = new()
       {
         Item = book,
         Price = book.Price,
@@ -61,16 +67,44 @@ public class SaleController : ControllerBase
       };
       return orderItem;
     }).ToList();
+
+
+
     Order order = new Order(orderItens);
+    // verificar se o total de order é igual ao total do payload
     if (order.Total != payload.OrderData.GetTotalParsed())
     {
       var message = new { error = $"order total value doesn't match with calculated value" };
       return BadRequest(message);
     }
-    // verificar se o total de order é igual ao total do payload
+    if (cupon != null)
+    {
+      order.ApplyCupon(cupon);
+
+    }
     Sale sale = payload.ToModel(country, stateInfo, order);
     await _saleService.Save(sale);
     var response = CreateSaleResponse.FromModel(sale);
     return Created(nameof(Sale), response);
+  }
+
+  private async Task<(Cupon?, string)> ValidateCupon(string code)
+  {
+    Cupon? cupon = null;
+    if (!string.IsNullOrEmpty(code))
+    {
+      cupon = await _saleService.FindCuponByCode(code);
+      if (cupon != null && !cupon.IsStillValid())
+      {
+        var message = $"Cupon with code {code} already expired";
+        return (cupon, message);
+      }
+      if (cupon is null)
+      {
+        var message = $"Cupon with code {code} doesn't exists";
+        return (cupon, message);
+      }
+    }
+    return (cupon, "");
   }
 }

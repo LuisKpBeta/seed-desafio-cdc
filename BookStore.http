@@ -94,7 +94,8 @@ Content-Type: application/json
         "quantidade": 1
       }
     ]
-  }
+  },
+  "Cupon":"CUPON90"
 }
 
 ###
@@ -102,7 +103,7 @@ POST {{BookStore_HostAddress}}/cupon
 Content-Type: application/json
 
 {
-  "Code": "CUPON10",
-  "Percentage": 50,
-  "ExpiresAt": "2024-09-24"
+  "Code": "CUPON90",
+  "Percentage": 90,
+  "ExpiresAt": "2024-12-24"
 }

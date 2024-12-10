@@ -31,11 +31,7 @@ public class CreateSaleResponse
       Quantity = i.Quantity,
       Value = (decimal)i.Price / 100
     }).ToList();
-    var order = new CreateOrderResponse
-    {
-      Total = (decimal)sale.SaleOrder.Total / 100,
-      Itens = itens
-    };
+    var order = new CreateOrderResponse(sale.SaleOrder.Total, sale.SaleOrder.CuponCode != "", itens, sale.SaleOrder.FinalValue);
     return new CreateSaleResponse
     {
       Id = sale.Id,
